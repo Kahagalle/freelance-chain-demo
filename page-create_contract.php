@@ -15,8 +15,11 @@ if (@$_POST['publish']) {
 
     if (no_displayed_error_result($publishtxid, multichain(
         'publishfrom', $_POST['client'], 'Contracts', $_POST['name'], bin2hex($data)
-    )))
-        output_success_text('Item successfully published in transaction ' . $publishtxid);
+    ))) {
+        if (no_displayed_error_result($prepare, multichain('preparelockunspentfrom',
+            $_POST['client'], array($_POST['asset'] => floatval($_POST['qty'])))))
+            output_success_text('Item successfully published in transaction ' . $publishtxid);
+    }
 }
 
 $labels = multichain_labels();

@@ -28,6 +28,22 @@ foreach ($items as $item) {
         $project = $item;
 }
 
+if (@$_POST['cancel']) {
+
+    if (no_displayed_error_result($result, multichain('lockunspent', true)))
+        output_success_text('Successfully canceled the contract ');
+
+}
+
+if (@$_POST['pay']) {
+
+    if (no_displayed_error_result($result, multichain('lockunspent', true))) {
+        $success = no_displayed_error_result($sendtxid, multichain('sendassetfrom', $_POST['from'], $_POST['to'], $_POST['asset'], floatval($_POST['qty'])));
+
+        if ($success)
+            output_success_text('Payment successfully sent in transaction ' . $sendtxid);
+    }
+}
 ?>
 
 <div class="row">
@@ -93,7 +109,7 @@ foreach ($items as $item) {
                 <h3>Contract - <?php echo html($project['key']) ?></h3>
 
                 <form method="post"
-                      action="./?chain=<?php echo html($_GET['chain']) ?>&page=<?php echo html($_GET['page']) ?>">
+                      action="./?chain=<?php echo html($_GET['chain']) ?>&page=<?php echo html($_GET['page']) ?>&project=<?php echo html($_GET['project']) ?>">
 
                     <?php
                     $oneoutput = false;
@@ -102,6 +118,7 @@ foreach ($items as $item) {
 
                     $binary = pack('H*', $project['data']);
                     $json = json_decode($binary, true);
+                    $client = null;
 
                     ?>
                     <table class="table table-bordered table-condensed table-striped table-break-words">
@@ -117,7 +134,7 @@ foreach ($items as $item) {
 
                                 foreach ($project['publishers'] as $publisher) {
                                     $link = './?chain=' . $_GET['chain'] . '&page=' . $_GET['page'] . '&stream=' . $viewstream['createtxid'] . '&client=' . $publisher;
-
+                                    $client = $publisher;
                                     ?><?php echo format_address_html($publisher, false, $labels, $link) ?><?php
 
                                 }
@@ -154,20 +171,22 @@ foreach ($items as $item) {
                             <td><?php echo $json['description'] ?></td>
                         </tr>
                         <tr>
-                            <th>State</th>
-                            <td></td>
-                        </tr>
-                        <tr>
                             <th>Timestamp</th>
                             <td><?php echo gmdate('Y-m-d H:i:s', isset($project['blocktime']) ? $project['blocktime'] : $project['time']) ?>
                                 GMT<?php echo isset($project['blocktime']) ? ' (confirmed)' : '' ?></td>
                         </tr>
                     </table>
                     <div class="form-group">
+                        <input type="hidden" name="from" value="<?php echo $client ?>">
+                        <input type="hidden" name="to" value="<?php echo $json['freelancer'] ?>">
+                        <input type="hidden" name="asset" value="<?php echo $json['asset'] ?>">
+                        <input type="hidden" name="qty" value="<?php echo $json['qty'] ?>">
+                    </div>
+                    <div class="form-group">
                         <div class="pull-right">
                             <input class="btn btn-default" type="submit" name="cancel" value="Cancel">
                             <input class="btn btn-default" type="submit" name="pay" value="Pay">
-<!--                            <input class="btn btn-default" type="submit" name="publish" value="Complete">-->
+                            <!--                            <input class="btn btn-default" type="submit" name="publish" value="Complete">-->
                         </div>
                     </div>
                 </form>

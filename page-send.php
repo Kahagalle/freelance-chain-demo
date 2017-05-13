@@ -4,7 +4,7 @@ if (@$_POST['unlockoutputs'])
         output_success_text('All outputs successfully unlocked');
 
 if (@$_POST['sendasset']) {
-    if (strlen($_POST['metadata']))
+    if (strlen(@$_POST['metadata']))
         $success = no_displayed_error_result($sendtxid, multichain('sendwithmetadatafrom',
             $_POST['from'], $_POST['to'], array($_POST['asset'] => floatval($_POST['qty'])), bin2hex($_POST['metadata'])));
     else
