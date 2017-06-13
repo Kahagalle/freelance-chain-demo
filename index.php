@@ -39,15 +39,15 @@
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav">
 						<li><a href="./?chain=<?php echo html($chain)?>">Node</a></li>
-						<li><a href="./?chain=<?php echo html($chain)?>&page=permissions">Permissions</a></li>
+						<!--<li><a href="./?chain=<?php echo html($chain)?>&page=permissions">Permissions</a></li>
 						<li><a href="./?chain=<?php echo html($chain)?>&page=issue" class="pair-first">Issue Asset</a></li>
-						<li><a href="./?chain=<?php echo html($chain)?>&page=update" class="pair-second">| Update</a></li>
-						<li><a href="./?chain=<?php echo html($chain)?>&page=send">Send</a></li>
+						<li><a href="./?chain=<?php echo html($chain)?>&page=update" class="pair-second">| Update</a></li>-->
+						<li><a href="./?chain=<?php echo html($chain)?>&page=send">Balance</a></li>
 						<!--<li><a href="./?chain=<?php echo html($chain)?>&page=offer" class="pair-first">Create Offer</a></li>
-						<li><a href="./?chain=<?php echo html($chain)?>&page=accept" class="pair-second">| Accept</a></li>-->
+						<li><a href="./?chain=<?php echo html($chain)?>&page=accept" class="pair-second">| Accept</a></li>
 						<li><a href="./?chain=<?php echo html($chain)?>&page=create">Create Stream</a></li>
 						<li><a href="./?chain=<?php echo html($chain)?>&page=publish">Publish</a></li>
-						<li><a href="./?chain=<?php echo html($chain)?>&page=view">View Streams</a></li>
+						<li><a href="./?chain=<?php echo html($chain)?>&page=view">View Streams</a></li>-->
                         <li><a href="./?chain=<?php echo html($chain)?>&page=create_contract" class="pair-first">Contracts Create</a></li>
                         <li><a href="./?chain=<?php echo html($chain)?>&page=view_contract" class="pair-second">| View</a></li>
                          <li><a href="./?chain=<?php echo html($chain)?>&page=post_project" class="pair-first">Post Project</a></li>
