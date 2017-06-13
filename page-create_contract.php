@@ -60,6 +60,9 @@ $receiveaddresses = array();
 $keyusableassets = array();
 $labels = array();
 $haslocked = false;
+$projects = array();
+
+no_displayed_error_result($Projects, multichain('liststreamitems', 'Projects', true));
 
 if (no_displayed_error_result($getaddresses, multichain('getaddresses', true))) {
 
@@ -119,7 +122,16 @@ if (no_displayed_error_result($getaddresses, multichain('getaddresses', true))) 
             <div class="form-group">
                 <label for="name" class="col-sm-2 control-label">Project Name</label>
                 <div class="col-sm-9">
-                    <input class="form-control" name="name" id="name">
+                   <!-- <input class="form-control" name="name" id="name"> -->
+                   <select class="form-control" name="name" id="name">
+                        <?php
+                        foreach ($Projects as $project) {
+                            ?>
+                            <option value="<?php echo $project['key'] ?>"><?php echo $project['key'] ?></option>
+                            <?php
+                        }
+                        ?>
+                    </select>
                 </div>
             </div>
             <div class="form-group">
