@@ -153,10 +153,13 @@ if (no_displayed_error_result($getaddresses, multichain('getaddresses', true))) 
                 <div class="col-sm-9">
                     <select class="form-control" name="freelancer" id="freelancer">
                         <?php
-                        foreach ($sendaddresses as $address) {
-                            ?>
-                            <option value="<?php echo html($address) ?>"><?php echo format_address_html($address, true, $labels) ?></option>
-                            <?php
+                        foreach ($receiveaddresses as $address) {
+                            if (!in_array($address, $sendaddresses)) {
+
+                                ?>
+                                <option value="<?php echo html($address) ?>"><?php echo format_address_html($address, true, $labels) ?></option>
+                                <?php
+                            }
                         }
                         ?>
                     </select>

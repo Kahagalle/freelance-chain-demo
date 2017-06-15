@@ -19,7 +19,7 @@ if (@$_POST['sendasset']) {
 <div class="row">
 
     <div class="col-sm-5">
-        <h3>Available Balances</h3>
+        <h3>Available Balance</h3>
 
         <?php
         $sendaddresses = array();
